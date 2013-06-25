@@ -1,0 +1,50 @@
+class Solution {
+public:
+  int trap(int A[], int n) {
+		// to deal with the boundry case
+		if (n<2) return 0;
+
+		int maxVal =0;
+		int maxValIndex=0;
+		int temHeight =A[0];
+		int total=0;
+		for ( int i=0; i!= n; i++ )
+		{
+			if (maxVal<A[i])
+			{
+				maxVal=A[i];
+				maxValIndex=i;
+			}
+		}
+		// to deal with the left side
+		if ( maxValIndex!= 0 )
+		{
+			for (  int i=0; i!= maxValIndex; i++ )
+			{
+				if (  A[i]<temHeight )
+				{
+					total+= (temHeight- A[i]);
+				} else 
+				{
+					temHeight= A[i];
+				} 
+			}
+		}
+		temHeight = A[n-1];
+		// to deal with the right side
+		if ( maxValIndex != n-1 )
+		{
+			for ( int i= (n-1); i!= maxValIndex; i-- )
+			{
+				if ( A[i] < temHeight )
+				{
+					total += (temHeight - A[i]);
+				} else 
+				{
+					temHeight= A[i];
+				}
+			}
+		}
+		return total;
+	}
+};
